@@ -10,9 +10,9 @@ public class LightAbsorbBar : MonoBehaviour
     public float LightAbsorbBarValue { get; set; } = 100.0f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        lightAbsorbBarImg.enabled = false;
     }
 
     // Update is called once per frame
