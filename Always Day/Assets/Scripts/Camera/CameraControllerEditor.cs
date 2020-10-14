@@ -37,13 +37,13 @@ public class CameraControllerEditor : Editor
 
         Handles.color = new Color(0, 1, 0, 1.0f);
         cameraPositionDetails.Height = Handles.ScaleSlider(cameraPositionDetails.Height, _player.transform.position, Vector3.up, Quaternion.identity, cameraPositionDetails.Height, 1f);
-        cameraPositionDetails.Height = Mathf.Clamp(cameraPositionDetails.Height, 10f, float.MaxValue);
+        cameraPositionDetails.Height = Mathf.Clamp(cameraPositionDetails.Height, 5f, float.MaxValue);
 
         Handles.color = new Color(0, 0, 1, 1.0f);
         Vector3 distanceDirection = Quaternion.AngleAxis(cameraPositionDetails.Angle, Vector3.up) * -_player.transform.forward * cameraPositionDetails.Distance;
         distanceDirection /= Vector3.Magnitude(distanceDirection);
         cameraPositionDetails.Distance = Handles.ScaleSlider(cameraPositionDetails.Distance, _player.transform.position, distanceDirection, Quaternion.identity, cameraPositionDetails.Distance, 1f);
-        cameraPositionDetails.Distance = Mathf.Clamp(cameraPositionDetails.Distance, 10f, float.MaxValue);
+        cameraPositionDetails.Distance = Mathf.Clamp(cameraPositionDetails.Distance, 5f, float.MaxValue);
 
 
         GUIStyle labelStyle = new GUIStyle();
