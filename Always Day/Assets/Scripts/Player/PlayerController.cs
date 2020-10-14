@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public bool isGrounded = true;
 
+    //For lock-on system
+    private bool isLockedOn;
+    private TestEnemyController lockOnTarget;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +27,8 @@ public class PlayerController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        isLockedOn = false;
+        lockOnTarget = null;
     }
 
     public void Move()
@@ -46,5 +52,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
             isGrounded = true;
+    }
+
+    public void LockOnToTarget()
+    {
+        RaycastHit rayHit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit))
+        {
+            lockOnTarget = rayHit.collider.GetComponent<TestEnemyController>();
+            if (lockOnTarget)
+            {
+                transform.LookAt(lockOnTarget.transform);
+            }
+        }
     }
 }

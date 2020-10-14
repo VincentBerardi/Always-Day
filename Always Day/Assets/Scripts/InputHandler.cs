@@ -27,6 +27,9 @@ public class InputHandler : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && playerController.isGrounded)
                 playerController.Jump();
+
+            if (Input.GetMouseButton(0))
+                playerController.LockOnToTarget();
         }
     }
 }
