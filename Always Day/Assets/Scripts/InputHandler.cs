@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    // For testing
-    private AudioManager audioManager;
+    [SerializeField]
+    private PlayerController playerController;
 
-    void Start()
+    void Awake()
     {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();    
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void Update()
@@ -19,11 +19,14 @@ public class InputHandler : MonoBehaviour
 
     void CheckInputs()
     {
-        // For testing
-        if (Input.GetKeyDown(KeyCode.Alpha1) && audioManager != null)
-            audioManager.Play("test");
+        // Player controls
+        if (playerController)
+        { 
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                playerController.Move();
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && audioManager != null)
-            audioManager.Stop("test");
+            if (Input.GetButtonDown("Jump") && playerController.isGrounded)
+                playerController.Jump();
+        }
     }
 }

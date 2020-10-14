@@ -2,40 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    private Rigidbody rb;
+    private Vector3 forward, right;
+
     [SerializeField]
-    float moveSpeed = 4f;
-    Vector3 forward, right;
+    private float moveSpeed = 4f;
+    [SerializeField]
+    private float jumpForce = 6f;
+    [SerializeField]
+    public bool isGrounded = true;
 
-    public LayerMask groundLayers;
-    public float jumpForce = 7;
-
-    public BoxCollider col;
-    public Rigidbody rb;
-
-    public bool isGrounded = true; 
-
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
+        // Make movement directions relative to isometric camera
         forward = Camera.main.transform.forward;
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
     }
 
-    void Update()
-    {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)  
-            Move();
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-            Jump();
-    }
-
-    void Move()
+    public void Move()
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
@@ -44,18 +34,17 @@ public class CharacterMovement : MonoBehaviour
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         transform.forward = heading;
         transform.position += rightMovement;
-        transform.position += upMovement; 
+        transform.position += upMovement;
     }
-
-    void Jump()
+    public void Jump()
     {
-        rb.AddForce(new Vector3(0,jumpForce,0), ForceMode.Impulse);
-        isGrounded = false; 
+        rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        isGrounded = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Ground")
+        if (collision.transform.CompareTag("Ground"))
             isGrounded = true;
     }
 }
