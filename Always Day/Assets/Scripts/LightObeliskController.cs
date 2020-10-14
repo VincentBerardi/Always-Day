@@ -9,8 +9,6 @@ public class LightObeliskController : MonoBehaviour
     Vector3 lightObeliskPos;
     public float emissionIntensity;
     public float emissionLossRate;
-    public GameObject player;
-    Vector3 playerPos;
 
     public Renderer renderer;
 
@@ -22,10 +20,8 @@ public class LightObeliskController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nearRadius = 0.8f;
         emissionLossRate = 0.1f;
         lightObeliskPos = transform.position;
-        playerPos = player.transform.position;
         color = mat.color;
         emissionIntensity = 3.416924f;
     }
@@ -33,20 +29,26 @@ public class LightObeliskController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPos = player.transform.position;
-
-        Debug.Log(Math.Abs(lightObeliskPos.magnitude - playerPos.magnitude));
-        if(Math.Abs(lightObeliskPos.magnitude - playerPos.magnitude) <= nearRadius )
-            PlayerIsNearEnoughToAbsorbLight();
+        PlayerIsNearEnoughToAbsorbLight();
     }
 
     private void PlayerIsNearEnoughToAbsorbLight()
+    {
+        Collider[] colliders = Physics.OverlapSphere(lightObeliskPos, nearRadius);
+
+        foreach (Collider cd in colliders)
+        {
+            if (cd.gameObject.GetComponent<PlayerController>())
+                DecrementEmissionLight();
+        }
+    }
+
+    private void DecrementEmissionLight()
     {
         float amountOfLightAbsorbed = 5.0f * Time.deltaTime;
         lightAbsorbBar.enabled = true;
         lightAbsorbBar.LightAbsorbBarProgress(amountOfLightAbsorbed);
         
-        Debug.Log(emissionIntensity);
         if (emissionIntensity > 0.8f)
         {
             emissionIntensity -= Time.deltaTime * emissionLossRate;
@@ -54,4 +56,13 @@ public class LightObeliskController : MonoBehaviour
             renderer.UpdateGIMaterials();
         }
     }
+
+    /*
+    //For testing radius
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, nearRadius);
+    }
+    /**/
 }
