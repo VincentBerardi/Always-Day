@@ -15,7 +15,8 @@ public class LightObeliskController : MonoBehaviour
     public Material mat;
     Color color;
 
-    public LightAbsorbBar lightAbsorbBar;
+    //If decide to add-on bar later
+    //public LightAbsorbBar lightAbsorbBar;
 
     // Start is called before the first frame update
     void Start()
@@ -45,10 +46,11 @@ public class LightObeliskController : MonoBehaviour
 
     private void DecrementEmissionLight()
     {
-        float amountOfLightAbsorbed = 5.0f * Time.deltaTime;
-        lightAbsorbBar.enabled = true;
-        lightAbsorbBar.LightAbsorbBarProgress(amountOfLightAbsorbed);
-        
+        //If decide to add-on bar later
+        //float amountOfLightAbsorbed = 5.0f * Time.deltaTime;
+        //lightAbsorbBar.enabled = true;
+        //lightAbsorbBar.LightAbsorbBarProgress(amountOfLightAbsorbed);
+
         if (emissionIntensity > 0.8f)
         {
             emissionIntensity -= Time.deltaTime * emissionLossRate;

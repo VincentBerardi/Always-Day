@@ -12,7 +12,7 @@ public class StunBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        stunBarImg.enabled = false;
+        //stunBarImg.enabled = false;
     }
 
     // Update is called once per frame

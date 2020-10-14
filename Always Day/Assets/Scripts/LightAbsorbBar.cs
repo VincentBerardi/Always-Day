@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//If decide to add-on light absorption bar later
 public class LightAbsorbBar : MonoBehaviour
 {
     public Image lightAbsorbBarImg;
@@ -12,7 +13,7 @@ public class LightAbsorbBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        lightAbsorbBarImg.enabled = false;
+        //lightAbsorbBarImg.enabled = false;
     }
 
     // Update is called once per frame
