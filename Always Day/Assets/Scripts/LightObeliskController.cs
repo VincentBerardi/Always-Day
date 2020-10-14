@@ -35,6 +35,7 @@ public class LightObeliskController : MonoBehaviour
     {
         playerPos = player.transform.position;
 
+        Debug.Log(Math.Abs(lightObeliskPos.magnitude - playerPos.magnitude));
         if(Math.Abs(lightObeliskPos.magnitude - playerPos.magnitude) <= nearRadius )
             PlayerIsNearEnoughToAbsorbLight();
     }
