@@ -37,14 +37,23 @@ public class CameraControllerEditor : Editor
 
         Handles.color = new Color(0, 1, 0, 1.0f);
         cameraPositionDetails.Height = Handles.ScaleSlider(cameraPositionDetails.Height, _player.transform.position, Vector3.up, Quaternion.identity, cameraPositionDetails.Height, 1f);
-        cameraPositionDetails.Height = Mathf.Clamp(cameraPositionDetails.Height, 5f, float.MaxValue);
 
         Handles.color = new Color(0, 0, 1, 1.0f);
         Vector3 distanceDirection = Quaternion.AngleAxis(cameraPositionDetails.Angle, Vector3.up) * -_player.transform.forward * cameraPositionDetails.Distance;
         distanceDirection /= Vector3.Magnitude(distanceDirection);
         cameraPositionDetails.Distance = Handles.ScaleSlider(cameraPositionDetails.Distance, _player.transform.position, distanceDirection, Quaternion.identity, cameraPositionDetails.Distance, 1f);
-        cameraPositionDetails.Distance = Mathf.Clamp(cameraPositionDetails.Distance, 5f, float.MaxValue);
 
+        Handles.color = new Color(0.16f, 0.021f, 0.24f, 1.0f);
+        Vector3 playerToCamera = _camera.transform.position - _player.transform.position;
+        float playerToCameraDistance = Vector3.Magnitude(playerToCamera);
+        float newVal = Handles.ScaleSlider(playerToCameraDistance, _player.transform.position, playerToCamera / playerToCameraDistance, Quaternion.identity, playerToCameraDistance, 1.0f);
+        float diff = newVal - playerToCameraDistance;
+
+        cameraPositionDetails.Height += diff;
+        cameraPositionDetails.Distance += diff;
+
+        cameraPositionDetails.Height = Mathf.Clamp(cameraPositionDetails.Height, 5f, float.MaxValue);
+        cameraPositionDetails.Distance = Mathf.Clamp(cameraPositionDetails.Distance, 5f, float.MaxValue);
 
         GUIStyle labelStyle = new GUIStyle();
         labelStyle.fontSize = 15;
