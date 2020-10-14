@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
 
     //For lock-on system
-    private bool isLockedOn;
     private TestEnemyController lockOnTarget;
 
     void Awake()
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-        isLockedOn = false;
         lockOnTarget = null;
     }
 
