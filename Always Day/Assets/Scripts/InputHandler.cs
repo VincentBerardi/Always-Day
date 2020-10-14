@@ -28,7 +28,7 @@ public class InputHandler : MonoBehaviour
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 playerController.Move();
 
-            if (Input.GetButtonDown("Jump") && playerController.isGrounded)
+            if (Input.GetButtonDown("Jump"))
                 playerController.Jump();
 
             if (Input.GetMouseButton(0))

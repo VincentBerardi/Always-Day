@@ -44,8 +44,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump()
     {
-        rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-        isGrounded = false;
+        if (isGrounded)
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            isGrounded = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
