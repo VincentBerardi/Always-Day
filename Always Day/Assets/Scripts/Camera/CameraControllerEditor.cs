@@ -36,17 +36,17 @@ public class CameraControllerEditor : Editor
         Handles.DrawWireDisc(_player.transform.position, Vector3.up, radius);
 
         Handles.color = new Color(0, 1, 0, 1.0f);
-        cameraPositionDetails.Height = Handles.ScaleSlider(cameraPositionDetails.Height, _player.transform.position, Vector3.up, Quaternion.identity, cameraPositionDetails.Height, 1f);
+        cameraPositionDetails.Height = Handles.ScaleSlider(cameraPositionDetails.Height, _player.transform.position, Vector3.up, Quaternion.identity, cameraPositionDetails.Height, 0.5f);
 
         Handles.color = new Color(0, 0, 1, 1.0f);
         Vector3 distanceDirection = Quaternion.AngleAxis(cameraPositionDetails.Angle, Vector3.up) * -_player.transform.forward * cameraPositionDetails.Distance;
         distanceDirection /= Vector3.Magnitude(distanceDirection);
-        cameraPositionDetails.Distance = Handles.ScaleSlider(cameraPositionDetails.Distance, _player.transform.position, distanceDirection, Quaternion.identity, cameraPositionDetails.Distance, 1f);
+        cameraPositionDetails.Distance = Handles.ScaleSlider(cameraPositionDetails.Distance, _player.transform.position, distanceDirection, Quaternion.identity, cameraPositionDetails.Distance, 0.5f);
 
         Handles.color = new Color(0.16f, 0.021f, 0.24f, 1.0f);
         Vector3 playerToCamera = _camera.transform.position - _player.transform.position;
         float playerToCameraDistance = Vector3.Magnitude(playerToCamera);
-        float newVal = Handles.ScaleSlider(playerToCameraDistance, _player.transform.position, playerToCamera / playerToCameraDistance, Quaternion.identity, playerToCameraDistance, 1.0f);
+        float newVal = Handles.ScaleSlider(playerToCameraDistance, _player.transform.position, playerToCamera / playerToCameraDistance, Quaternion.identity, playerToCameraDistance, 0.5f);
         float diff = newVal - playerToCameraDistance;
 
         cameraPositionDetails.Height += diff;
@@ -58,11 +58,12 @@ public class CameraControllerEditor : Editor
         GUIStyle labelStyle = new GUIStyle();
         labelStyle.fontSize = 15;
         labelStyle.normal.textColor = Color.white;
-        labelStyle.alignment = TextAnchor.MiddleCenter;
+        labelStyle.alignment = TextAnchor.LowerLeft;
         labelStyle.fontStyle = FontStyle.Bold;
 
         Handles.Label(new Vector3(_camera.transform.position.x, _player.transform.position.y, _camera.transform.position.z), "Distance", labelStyle);
         Handles.Label(new Vector3(_player.transform.position.x, _camera.transform.position.y, _player.transform.position.z), "Height", labelStyle);
+        Handles.Label(_camera.transform.position, "Camera", labelStyle);
 
         cameraPositionDetails.positionCamera();
     }
