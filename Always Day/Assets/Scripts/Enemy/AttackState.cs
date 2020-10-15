@@ -15,6 +15,7 @@ public class AttackState : State
     {
         Debug.Log("Start attacking!");
     }
+
     public override void Update()
     {
         _target.agent.SetDestination(_target.transform.position);
@@ -22,7 +23,18 @@ public class AttackState : State
 
         if (!_target.alreadyAttacked)
         {
-            _target.ShootProjectile();
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    _target.ShootProjectile();
+                    break;
+                case 1:
+                    _target.ShootProjectile();
+                    break;
+                case 2:
+                    _target.SpecialAttack();
+                    break;
+            }
         }
     }
 

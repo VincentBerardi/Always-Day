@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 6f;
     [SerializeField]
     public bool isGrounded = true;
+    [SerializeField]
+    public bool isStunned = false;
 
     //For lock-on system
     private TestEnemyController lockOnTarget;
@@ -39,16 +41,34 @@ public class PlayerController : MonoBehaviour
 
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+
+        if (!isStunned)
+        {
+            transform.position += rightMovement;
+            transform.position += upMovement;
+        }
     }
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && !isStunned)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
         }
+    }
+
+    public void GetStunned()
+    {
+        if (!isStunned)
+        {
+            isStunned = true;
+            Invoke(nameof(ResetStun), 1.5f);
+        }
+    }
+
+    private void ResetStun()
+    {
+        isStunned = false;
     }
 
     private void OnCollisionEnter(Collision collision)

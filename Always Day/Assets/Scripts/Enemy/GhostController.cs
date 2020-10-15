@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class GhostController : StateMachine
 {
+    public enum GhostType { Red, Green, Blue};
+
     public NavMeshAgent agent;
     public Rigidbody rigidBody;
     public Transform player;
@@ -29,6 +31,8 @@ public class GhostController : StateMachine
     [SerializeField]
     public float projectileForce = 32f;
     [SerializeField]
+    public float rammingForce = 1f;
+    [SerializeField]
     public bool alreadyAttacked;
     [SerializeField]
     public GameObject projectile;
@@ -44,6 +48,8 @@ public class GhostController : StateMachine
     public bool playerInSightRange;
     [SerializeField]
     public bool playerInAttackRange;
+    [SerializeField]
+    public GhostType ghostType = GhostType.Red;
 
     private void Awake()
     {
@@ -51,6 +57,7 @@ public class GhostController : StateMachine
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.isKinematic = false; 
 
         this.CurrentState = new PatrolState(this, this.gameObject);
     }
@@ -72,14 +79,62 @@ public class GhostController : StateMachine
 
     public void ShootProjectile()
     {
-        Rigidbody rb = Instantiate(projectile, transform.position + transform.forward * projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
-        alreadyAttacked = true;
-        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        switch (ghostType)
+        {
+            case GhostType.Red:
+                Rigidbody rb = Instantiate(projectile, transform.position + transform.forward * projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+                alreadyAttacked = true;
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                break;
+            case GhostType.Green:
+                //TODO
+                break;
+            case GhostType.Blue:
+                //TODO
+                break;
+        }
     }
+
+    public void SpecialAttack()
+    {
+        switch (ghostType) {
+            case GhostType.Red:
+                rigidBody.isKinematic = false;
+                agent.enabled = false;
+                rigidBody.AddForce(transform.forward * rammingForce, ForceMode.Impulse);
+                alreadyAttacked = true;
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                break;
+            case GhostType.Green:
+                //TODO
+                break;
+            case GhostType.Blue:
+                //TODO
+                break;
+        }
+    }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
+        agent.enabled = true;
+        rigidBody.isKinematic = true;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            collision.transform.GetComponent<PlayerController>().GetStunned();
+            agent.enabled = true;
+            rigidBody.isKinematic = true;
+        }
+        if (collision.transform.CompareTag("Wall"))
+        {
+            agent.enabled = true;
+            rigidBody.isKinematic = true;
+        }
+
+    }
 }
