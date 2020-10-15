@@ -7,6 +7,9 @@ public class InputHandler : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
+    //For logic of stun bar progress
+    public StunBar stunBar;
+
     void Awake()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -27,6 +30,14 @@ public class InputHandler : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && playerController.isGrounded)
                 playerController.Jump();
+
+            if (Input.GetMouseButton(0))
+                playerController.LockOnToTarget();
+            else
+            {
+                stunBar.stunBarImg.fillAmount = 0.0f;
+                stunBar.stunBarImg.enabled = false;
+            }
         }
     }
 }

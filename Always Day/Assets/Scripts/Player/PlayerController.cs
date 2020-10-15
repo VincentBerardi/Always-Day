@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public bool isGrounded = true;
 
+    //For lock-on system
+    private TestEnemyController lockOnTarget;
+    public StunBar stunBar;
+    public float stunBarIncrement;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        lockOnTarget = null;
     }
 
     public void Move()
@@ -46,5 +52,25 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
             isGrounded = true;
+    }
+
+    public void LockOnToTarget()
+    {
+        RaycastHit rayHit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit))
+        {
+            lockOnTarget = rayHit.collider.GetComponent<TestEnemyController>();
+            if (lockOnTarget)
+            {
+                transform.LookAt(lockOnTarget.transform);
+                stunBar.stunBarImg.enabled = true;
+                stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
+            }
+        }
+        else
+        {
+            stunBar.stunBarImg.fillAmount = 0.0f;
+            stunBar.stunBarImg.enabled = false;
+        }
     }
 }

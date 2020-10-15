@@ -12,18 +12,25 @@ public class StunBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //stunBarImg.enabled = false;
+        stunBarImg.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        StunBarProgress(5.0f * Time.deltaTime);
+        stunBarImg.transform.position = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     public void StunBarProgress(float stunBarFillValue)
     {
         float fillAmount = stunBarFillValue / 100.0f;
         stunBarImg.fillAmount += fillAmount;
+
+        if (stunBarImg.fillAmount >= 1.0f)
+        {
+            stunBarImg.fillAmount = 0.0f;
+            stunBarImg.enabled = false;
+            Debug.Log("Stun Enemy spell");
+        }
     }
 }
