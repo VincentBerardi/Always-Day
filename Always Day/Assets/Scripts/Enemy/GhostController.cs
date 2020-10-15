@@ -3,112 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GhostController : MonoBehaviour
+public class GhostController : StateMachine
 {
-    private NavMeshAgent agent;
-    private Rigidbody rigidBody;
-    private Transform player;
+    public NavMeshAgent agent;
+    public Rigidbody rigidBody;
+    public Transform player;
 
     [Header("References")]
     [SerializeField]
-    private LayerMask whatIsGround;
+    public LayerMask whatIsGround;
     [SerializeField]
-    private LayerMask whatIsPlayer;
+    public LayerMask whatIsPlayer;
 
     [Header("Patroling")]
     [SerializeField]
-    private Vector3 walkPoint;
+    public Vector3 walkPoint;
     [SerializeField]
-    private bool walkPointSet;
+    public bool walkPointSet;
     [SerializeField]
-    private float walkPointRange;
+    public float walkPointRange = 50f;
 
     [Header("Attacking")]
     [SerializeField]
-    private float timeBetweenAttacks;
+    public float timeBetweenAttacks = 1f;
     [SerializeField]
-    private float projectileForce = 32f;
+    public float projectileForce = 32f;
     [SerializeField]
-    private bool alreadyAttacked;
+    public bool alreadyAttacked;
     [SerializeField]
-    private GameObject projectile;
-
+    public GameObject projectile;
+    [SerializeField]
+    public float projectileStartDist = 2f;
 
     [Header("States")]
     [SerializeField]
-    private float sightRange;
+    public float sightRange = 24f;
     [SerializeField]
-    private float attackRange;
+    public float attackRange = 15f;
     [SerializeField]
-    private bool playerInSightRange;
+    public bool playerInSightRange;
     [SerializeField]
-    private bool playerInAttackRange;
+    public bool playerInAttackRange;
 
     private void Awake()
     {
+
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rigidBody = GetComponent<Rigidbody>();
-        
+
+        this.CurrentState = new PatrolState(this, this.gameObject);
     }
 
     private void Update()
     {
+        this.CurrentState.Update();
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
-            Patroling();
-        if (playerInSightRange && !playerInAttackRange)
-            ChasePlayer();
-        if (playerInSightRange && playerInAttackRange)
-            AttackPlayer();
+        if (CurrentState.GetType() != typeof(PatrolState) && !playerInSightRange && !playerInAttackRange)
+            this.CurrentState = new PatrolState(this, this.gameObject);
+        if (CurrentState.GetType() != typeof(ChaseState) && playerInSightRange && !playerInAttackRange)
+            this.CurrentState = new ChaseState(this, this.gameObject);
+        if (CurrentState.GetType() != typeof(AttackState) && playerInSightRange && playerInAttackRange)
+            this.CurrentState = new AttackState(this, this.gameObject);
     }
-    private void Patroling()
+
+    public void ShootProjectile()
     {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        Rigidbody rb = Instantiate(projectile, transform.position + transform.forward * projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+        alreadyAttacked = true;
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
-
-    private void SearchWalkPoint()
-    {
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        
-        NavMeshPath navMeshPath = new NavMeshPath();
-        if(agent.CalculatePath(walkPoint, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)       
-            walkPointSet = true; 
-    }
-
-    private void ChasePlayer()
-    {
-        agent.SetDestination(player.position);
-    }
-
-    private void AttackPlayer()
-    {
-        agent.SetDestination(transform.position);
-        transform.LookAt(player);
-
-        if (!alreadyAttacked){
-            Rigidbody rb = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
     private void ResetAttack()
     {
         alreadyAttacked = false;
     }
+
 }
