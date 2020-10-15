@@ -730,6 +730,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1302107071}
+    - target: {fileID: 2861152181240799435, guid: d0ce794216d0d5141bf695b9442dc46d,
+        type: 3}
+      propertyPath: stunBar
+      value: 
+      objectReference: {fileID: 1464428651}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0ce794216d0d5141bf695b9442dc46d, type: 3}
 --- !u!1 &592190390

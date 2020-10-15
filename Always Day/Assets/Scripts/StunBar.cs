@@ -27,6 +27,10 @@ public class StunBar : MonoBehaviour
         stunBarImg.fillAmount += fillAmount;
 
         if (stunBarImg.fillAmount >= 1.0f)
+        {
+            stunBarImg.fillAmount = 0.0f;
+            stunBarImg.enabled = false;
             Debug.Log("Stun Enemy spell");
+        }
     }
 }

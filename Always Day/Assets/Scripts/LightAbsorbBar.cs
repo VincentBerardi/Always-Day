@@ -13,13 +13,13 @@ public class LightAbsorbBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //lightAbsorbBarImg.enabled = false;
+        lightAbsorbBarImg.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LightAbsorbBarProgress(5.0f * Time.deltaTime);
+        //LightAbsorbBarProgress(5.0f * Time.deltaTime);
     }
 
     public void LightAbsorbBarProgress(float lightAbsorbFillValue)
