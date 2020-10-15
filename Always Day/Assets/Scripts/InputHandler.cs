@@ -6,10 +6,9 @@ public class InputHandler : MonoBehaviour
 {
     [SerializeField]
     private PlayerController playerController;
-    
-    //Logic for stun bar progress
+
+    //For logic of stun bar progress
     public StunBar stunBar;
-    public float stunBarIncrement;
 
     void Awake()
     {
@@ -33,17 +32,12 @@ public class InputHandler : MonoBehaviour
                 playerController.Jump();
 
             if (Input.GetMouseButton(0))
-            {
                 playerController.LockOnToTarget();
-                stunBar.stunBarImg.enabled = true;
-                stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
-            }
             else
             {
                 stunBar.stunBarImg.fillAmount = 0.0f;
                 stunBar.stunBarImg.enabled = false;
             }
-
         }
     }
 }

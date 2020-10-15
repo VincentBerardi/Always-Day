@@ -19,7 +19,6 @@ public class StunBar : MonoBehaviour
     void Update()
     {
         stunBarImg.transform.position = Camera.main.WorldToScreenPoint(transform.position);
-        //StunBarProgress(5.0f * Time.deltaTime);
     }
 
     public void StunBarProgress(float stunBarFillValue)
@@ -27,9 +26,7 @@ public class StunBar : MonoBehaviour
         float fillAmount = stunBarFillValue / 100.0f;
         stunBarImg.fillAmount += fillAmount;
 
-        if (stunBarImg.fillAmount >= 1)
-        {
-            Debug.Log("StunEnemy");     //placehold debug for stunning enemy condition
-        }
+        if (stunBarImg.fillAmount >= 1.0f)
+            Debug.Log("Stun Enemy spell");
     }
 }

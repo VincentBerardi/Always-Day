@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     //For lock-on system
     private TestEnemyController lockOnTarget;
+    public StunBar stunBar;
+    public float stunBarIncrement;
 
     void Awake()
     {
@@ -61,7 +63,14 @@ public class PlayerController : MonoBehaviour
             if (lockOnTarget)
             {
                 transform.LookAt(lockOnTarget.transform);
+                stunBar.stunBarImg.enabled = true;
+                stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
             }
+        }
+        else
+        {
+            stunBar.stunBarImg.fillAmount = 0.0f;
+            stunBar.stunBarImg.enabled = false;
         }
     }
 }
