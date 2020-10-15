@@ -39,7 +39,7 @@ public class CameraControllerEditor : Editor
         cameraPositionDetails.Height = Handles.ScaleSlider(cameraPositionDetails.Height, _player.transform.position, Vector3.up, Quaternion.identity, cameraPositionDetails.Height, 0.5f);
 
         Handles.color = new Color(0, 0, 1, 1.0f);
-        Vector3 distanceDirection = Quaternion.AngleAxis(cameraPositionDetails.Angle, Vector3.up) * -_player.transform.forward * cameraPositionDetails.Distance;
+        Vector3 distanceDirection = Quaternion.AngleAxis(cameraPositionDetails.Angle, Vector3.up) * -Vector3.forward * cameraPositionDetails.Distance;
         distanceDirection /= Vector3.Magnitude(distanceDirection);
         cameraPositionDetails.Distance = Handles.ScaleSlider(cameraPositionDetails.Distance, _player.transform.position, distanceDirection, Quaternion.identity, cameraPositionDetails.Distance, 0.5f);
 

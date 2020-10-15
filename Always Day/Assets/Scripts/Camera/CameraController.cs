@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour
     public void positionCamera()
     {
         Vector3 cameraHeight = Vector3.up * _height;
-        Vector3 cameraDistance = Quaternion.AngleAxis(_angle, Vector3.up) * -player.transform.forward * _distance;
-        Vector3 cameraPosition = cameraHeight + cameraDistance;
+        Vector3 cameraDistance = Quaternion.AngleAxis(_angle, Vector3.up) * -Vector3.forward * _distance;
+        Vector3 cameraPosition = player.transform.position + cameraHeight + cameraDistance;
 
         _camera.transform.position = cameraPosition;
 
