@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveBackwardState : State
 {
-
     private GameObject _target;
 
     public MoveBackwardState(StateMachine stateMachine, GameObject target) : base(stateMachine)

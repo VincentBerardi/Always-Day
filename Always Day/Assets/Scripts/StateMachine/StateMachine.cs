@@ -1,4 +1,6 @@
-﻿public class StateMachine
+﻿using UnityEngine;
+
+public class StateMachine : MonoBehaviour
 {
     private State _currentState;
 

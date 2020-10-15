@@ -1,21 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MovingStateMachine : MonoBehaviour
+﻿public class MovingStateMachine : StateMachine
 {
-    StateMachine stateMachine;
-
-    // Start is called before the first frame update
     void Start()
     {
-        stateMachine = new StateMachine();
-        stateMachine.CurrentState = new MoveForwardState(stateMachine, this.gameObject);
+        this.CurrentState = new MoveForwardState(this, this.gameObject);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        stateMachine.CurrentState.Update();
+        this.CurrentState.Update();
     }
 }
