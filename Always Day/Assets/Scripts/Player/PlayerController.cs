@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool isStunned = false;
 
     //For lock-on system
-    private TestEnemyController lockOnTarget;
+    private GhostController lockOnTarget;
     public StunBar stunBar;
     public float stunBarIncrement;
 
@@ -80,15 +80,14 @@ public class PlayerController : MonoBehaviour
     public void LockOnToTarget()
     {
         RaycastHit rayHit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit))
+        // Test between raycast and spherecast. 
+        //Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit);
+        Physics.SphereCast(Camera.main.ScreenPointToRay(Input.mousePosition), 1f, out rayHit);
+        if (lockOnTarget = rayHit.collider.GetComponent<GhostController>())
         {
-            lockOnTarget = rayHit.collider.GetComponent<TestEnemyController>();
-            if (lockOnTarget)
-            {
-                transform.LookAt(lockOnTarget.transform);
-                stunBar.stunBarImg.enabled = true;
-                stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
-            }
+            transform.LookAt(new Vector3(lockOnTarget.transform.position.x, transform.position.y, lockOnTarget.transform.position.z));
+            stunBar.stunBarImg.enabled = true;
+            stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);         
         }
         else
         {
