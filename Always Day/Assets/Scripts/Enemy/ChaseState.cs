@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : State
+public class ChaseState : BaseEnemyState
 {
-    private GhostController _target;
-
-    public ChaseState(StateMachine stateMachine, GameObject target) : base(stateMachine)
+    public ChaseState(GhostController controller) : base(controller)
     {
-        _target = target.GetComponent<GhostController>();
     }
 
     public override void OnEnter()
@@ -17,7 +14,20 @@ public class ChaseState : State
     }
     public override void Update()
     {
-        _target.agent.SetDestination(_target.player.position);
+
+        if (!_controller.isPlayerInSightRange())
+        {
+            _controller.CurrentState = new PatrolState(_controller);
+            return;
+        }
+
+        if (_controller.isPlayerInAttackRange())
+        {
+            _controller.CurrentState = new AttackState(_controller);
+            return;
+        }
+
+        _controller.agent.SetDestination(_controller.player.position);
     }
     public override void OnExit()
     {

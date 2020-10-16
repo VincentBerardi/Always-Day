@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GhostController : StateMachine
 {
-    public enum GhostType { Red, Green, Blue};
+    public enum GhostType { Red, Green, Blue };
 
     public NavMeshAgent agent;
     public Rigidbody rigidBody;
@@ -57,70 +57,26 @@ public class GhostController : StateMachine
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.isKinematic = false; 
+        rigidBody.isKinematic = false;
 
-        this.CurrentState = new PatrolState(this, this.gameObject);
+        this.CurrentState = new PatrolState(this);
     }
 
     private void Update()
     {
         this.CurrentState.Update();
-
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (CurrentState.GetType() != typeof(PatrolState) && !playerInSightRange && !playerInAttackRange)
-            this.CurrentState = new PatrolState(this, this.gameObject);
-        if (CurrentState.GetType() != typeof(ChaseState) && playerInSightRange && !playerInAttackRange)
-            this.CurrentState = new ChaseState(this, this.gameObject);
-        if (CurrentState.GetType() != typeof(AttackState) && playerInSightRange && playerInAttackRange)
-            this.CurrentState = new AttackState(this, this.gameObject);
     }
 
-    public void ShootProjectile()
+    public bool isPlayerInSightRange()
     {
-        switch (ghostType)
-        {
-            case GhostType.Red:
-                Rigidbody rb = Instantiate(projectile, transform.position + transform.forward * projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
-                alreadyAttacked = true;
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-                break;
-            case GhostType.Green:
-                //TODO
-                break;
-            case GhostType.Blue:
-                //TODO
-                break;
-        }
+        return Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
     }
 
-    public void SpecialAttack()
+    public bool isPlayerInAttackRange()
     {
-        switch (ghostType) {
-            case GhostType.Red:
-                rigidBody.isKinematic = false;
-                agent.enabled = false;
-                rigidBody.AddForce(transform.forward * rammingForce, ForceMode.Impulse);
-                alreadyAttacked = true;
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-                break;
-            case GhostType.Green:
-                //TODO
-                break;
-            case GhostType.Blue:
-                //TODO
-                break;
-        }
+        return Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
     }
 
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-        agent.enabled = true;
-        rigidBody.isKinematic = true;
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -137,4 +93,13 @@ public class GhostController : StateMachine
         }
 
     }
+
+    public void ResetAttack()
+    {
+        alreadyAttacked = false;
+        agent.enabled = true;
+        rigidBody.isKinematic = true;
+    }
+
+
 }
