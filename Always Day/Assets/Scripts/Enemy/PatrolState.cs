@@ -22,7 +22,6 @@ public class PatrolState : BaseEnemyState
             return;
         }
 
-
         if (!_controller.walkPointSet)
         {
             SearchWalkPoint();
