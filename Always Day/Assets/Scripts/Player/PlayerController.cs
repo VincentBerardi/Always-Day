@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 6f;
     [SerializeField]
     public bool isGrounded = true;
+    [SerializeField]
+    public bool isStunned = false;
 
     //For lock-on system
-    private TestEnemyController lockOnTarget;
+    private GhostController lockOnTarget;
     public StunBar stunBar;
     public float stunBarIncrement;
 
@@ -39,13 +41,34 @@ public class PlayerController : MonoBehaviour
 
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+
+        if (!isStunned)
+        {
+            transform.position += rightMovement;
+            transform.position += upMovement;
+        }
     }
     public void Jump()
     {
-        rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-        isGrounded = false;
+        if (isGrounded && !isStunned)
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            isGrounded = false;
+        }
+    }
+
+    public void GetStunned()
+    {
+        if (!isStunned)
+        {
+            isStunned = true;
+            Invoke(nameof(ResetStun), 1.5f);
+        }
+    }
+
+    private void ResetStun()
+    {
+        isStunned = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -57,15 +80,14 @@ public class PlayerController : MonoBehaviour
     public void LockOnToTarget()
     {
         RaycastHit rayHit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit))
+        // Test between raycast and spherecast. 
+        //Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit);
+        Physics.SphereCast(Camera.main.ScreenPointToRay(Input.mousePosition), 1f, out rayHit);
+        if (lockOnTarget = rayHit.collider.GetComponent<GhostController>())
         {
-            lockOnTarget = rayHit.collider.GetComponent<TestEnemyController>();
-            if (lockOnTarget)
-            {
-                transform.LookAt(lockOnTarget.transform);
-                stunBar.stunBarImg.enabled = true;
-                stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
-            }
+            transform.LookAt(new Vector3(lockOnTarget.transform.position.x, transform.position.y, lockOnTarget.transform.position.z));
+            stunBar.stunBarImg.enabled = true;
+            stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);         
         }
         else
         {
