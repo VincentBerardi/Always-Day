@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
+            animator.SetBool("isGrounded", false);
+
         }
     }
 
@@ -79,11 +81,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
         {
+            animator.SetBool("isGrounded", true);
             isGrounded = true;
         }
 
         if (collision.transform.CompareTag("Platform"))
         {
+            animator.SetBool("isGrounded", true);
             isGrounded = true;
             currentMovingPlatform = collision.gameObject.transform;
             transform.SetParent(currentMovingPlatform);
