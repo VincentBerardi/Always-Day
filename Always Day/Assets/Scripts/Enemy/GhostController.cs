@@ -32,6 +32,7 @@ public class GhostController : StateMachine
 
     [Header("Green Ghost Attack")]
     public GameObject greenProjectileAttack;
+    public GameObject greenSpecialAttack;
 
     [Header("Blue Ghost Attack")]
     public GameObject blueProjectileAttack;

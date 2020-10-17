@@ -22,12 +22,14 @@ public class BlueGhostAttackState : AttackState
 
     public override void ShootProjectile()
     {
+        Rigidbody rb = GhostController.Instantiate(_controller.blueProjectileAttack, _controller.transform.position + _controller.transform.forward * _controller.projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
+        rb.AddForce(_controller.transform.forward * _controller.projectileForce, ForceMode.Impulse);
         resetAttack();
     }
 
     public override void SpecialAttack()
     {
-        GhostController.Instantiate(_controller.blueSpecialAttack, _controller.transform.position, Quaternion.identity);
+        // GhostController.Instantiate(_controller.blueSpecialAttack, _controller.transform.position, Quaternion.identity);
         resetAttack();
     }
 }

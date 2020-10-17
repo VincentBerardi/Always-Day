@@ -14,7 +14,7 @@ public class TornadoSpin : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
-        Destroy(this.gameObject, 10.0f);
+        Destroy(this.GetComponentInParent<Transform>().gameObject, 10.0f);
     }
 
     private void Update()
