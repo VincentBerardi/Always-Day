@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 forward, right;
+    //public Animator animator; 
 
     [SerializeField]
     private float moveSpeed = 4f;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        //animator = GetComponentInChildren<Animator>();
 
         // Make movement directions relative to isometric camera
         forward = Camera.main.transform.forward;
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 

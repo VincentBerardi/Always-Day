@@ -24,9 +24,16 @@ public class InputHandler : MonoBehaviour
     {
         // Player controls
         if (playerController)
-        { 
+        {
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
                 playerController.Move();
+                //playerController.animator.SetBool("isRunning", true);
+            }
+            //else
+            //{
+            //    playerController.animator.SetBool("isRunning", false);
+            //}
 
             if (Input.GetButtonDown("Jump"))
                 playerController.Jump();
