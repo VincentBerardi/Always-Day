@@ -7,6 +7,8 @@ public class GhostController : StateMachine
 {
     public enum GhostType { Red, Green, Blue };
 
+    public GhostType ghostType;
+
     public NavMeshAgent agent;
     public Rigidbody rigidBody;
     public Transform player;
@@ -49,7 +51,6 @@ public class GhostController : StateMachine
     [SerializeField]
     public bool playerInAttackRange;
     [SerializeField]
-    public GhostType ghostType = GhostType.Red;
 
     private void Awake()
     {
@@ -91,7 +92,6 @@ public class GhostController : StateMachine
             agent.enabled = true;
             rigidBody.isKinematic = true;
         }
-
     }
 
     public void ResetAttack()
@@ -100,6 +100,4 @@ public class GhostController : StateMachine
         agent.enabled = true;
         rigidBody.isKinematic = true;
     }
-
-
 }

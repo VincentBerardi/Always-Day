@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : BaseEnemyState
+public abstract class AttackState : BaseEnemyState
 {
     public AttackState(GhostController controller) : base(controller)
     {
@@ -47,42 +47,14 @@ public class AttackState : BaseEnemyState
         Debug.Log("Stop attacking!");
     }
 
-    public void ShootProjectile()
+    public abstract void ShootProjectile();
+    public abstract void SpecialAttack();
+
+    public virtual void resetAttack()
     {
-        switch (_controller.ghostType)
-        {
-            case GhostController.GhostType.Red:
-                Rigidbody rb = GhostController.Instantiate(_controller.projectile, _controller.transform.position + _controller.transform.forward * _controller.projectileStartDist, Quaternion.identity).GetComponent<Rigidbody>();
-                rb.AddForce(_controller.transform.forward * _controller.projectileForce, ForceMode.Impulse);
-                _controller.alreadyAttacked = true;
-                _controller.Invoke(nameof(_controller.ResetAttack), _controller.timeBetweenAttacks);
-                break;
-            case GhostController.GhostType.Green:
-                //TODO
-                break;
-            case GhostController.GhostType.Blue:
-                //TODO
-                break;
-        }
+        _controller.alreadyAttacked = true;
+        _controller.Invoke(nameof(_controller.ResetAttack), _controller.timeBetweenAttacks);
     }
 
-    public void SpecialAttack()
-    {
-        switch (_controller.ghostType)
-        {
-            case GhostController.GhostType.Red:
-                _controller.rigidBody.isKinematic = false;
-                _controller.agent.enabled = false;
-                _controller.rigidBody.AddForce(_controller.transform.forward * _controller.rammingForce, ForceMode.Impulse);
-                _controller.alreadyAttacked = true;
-                _controller.Invoke(nameof(_controller.ResetAttack), _controller.timeBetweenAttacks);
-                break;
-            case GhostController.GhostType.Green:
-                //TODO
-                break;
-            case GhostController.GhostType.Blue:
-                //TODO
-                break;
-        }
-    }
+
 }
