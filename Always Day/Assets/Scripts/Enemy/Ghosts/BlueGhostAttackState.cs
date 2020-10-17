@@ -29,7 +29,7 @@ public class BlueGhostAttackState : AttackState
 
     public override void SpecialAttack()
     {
-        // GhostController.Instantiate(_controller.blueSpecialAttack, _controller.transform.position, Quaternion.identity);
+        GhostController.Instantiate(_controller.blueSpecialAttack, _controller.transform.position, Quaternion.identity);
         resetAttack();
     }
 }

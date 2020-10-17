@@ -25,8 +25,6 @@ public class GreenGhostAttackState : AttackState
     {
         Vector3 newRingPos = new Vector3(_controller.transform.position.x, 0.5f, _controller.transform.position.z);
         GameObject newRing = GhostController.Instantiate(_controller.greenProjectileAttack, newRingPos, Quaternion.Euler(-90, 0, 0));
-        SpecialAttack();
-
         resetAttack();
     }
 
