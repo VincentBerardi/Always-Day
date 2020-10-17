@@ -22,12 +22,13 @@ public class BlueGhostAttackState : AttackState
 
     public override void ShootProjectile()
     {
-
+        resetAttack();
     }
 
     public override void SpecialAttack()
     {
-        throw new System.NotImplementedException();
+        GhostController.Instantiate(_controller.blueSpecialAttack, _controller.transform.position, Quaternion.identity);
+        resetAttack();
     }
 }
 

@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class GhostController : StateMachine
 {
     public enum GhostType { Red, Green, Blue };
-
     public GhostType ghostType;
 
     public NavMeshAgent agent;
@@ -14,43 +13,37 @@ public class GhostController : StateMachine
     public Transform player;
 
     [Header("References")]
-    [SerializeField]
     public LayerMask whatIsGround;
-    [SerializeField]
     public LayerMask whatIsPlayer;
 
     [Header("Patroling")]
-    [SerializeField]
     public Vector3 walkPoint;
-    [SerializeField]
     public bool walkPointSet;
-    [SerializeField]
     public float walkPointRange = 50f;
 
     [Header("Attacking")]
-    [SerializeField]
     public float timeBetweenAttacks = 1f;
-    [SerializeField]
-    public float projectileForce = 32f;
-    [SerializeField]
-    public float rammingForce = 1f;
-    [SerializeField]
-    public bool alreadyAttacked;
-    [SerializeField]
-    public GameObject projectile;
-    [SerializeField]
     public float projectileStartDist = 2f;
+    public float projectileForce = 32f;
+    public float rammingForce = 1f;
+    public bool alreadyAttacked;
+    public GameObject projectile;
+
+
+    [Header("Green Ghost Attack")]
+    public GameObject greenProjectileAttack;
+
+    [Header("Blue Ghost Attack")]
+    public GameObject blueProjectileAttack;
+    public GameObject blueSpecialAttack;
+
 
     [Header("States")]
-    [SerializeField]
     public float sightRange = 24f;
-    [SerializeField]
     public float attackRange = 15f;
-    [SerializeField]
     public bool playerInSightRange;
-    [SerializeField]
     public bool playerInAttackRange;
-    [SerializeField]
+
 
     private void Awake()
     {
