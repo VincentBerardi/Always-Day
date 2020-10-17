@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 forward, right;
-    //public Animator animator; 
+    public Animator animator; 
 
     [SerializeField]
     private float moveSpeed = 4f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         // Make movement directions relative to isometric camera
         forward = Camera.main.transform.forward;
@@ -78,7 +78,9 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Ground"))
+        {
             isGrounded = true;
+        }
 
         if (collision.transform.CompareTag("Platform"))
         {
