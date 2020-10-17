@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public StunBar stunBar;
     public float stunBarIncrement;
 
+    public Transform currentMovingPlatform;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && !isStunned)
         {
+            transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
         }
@@ -76,6 +79,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
             isGrounded = true;
+
+        if (collision.transform.CompareTag("Platform"))
+        {
+            isGrounded = true;
+            currentMovingPlatform = collision.gameObject.transform;
+            transform.SetParent(currentMovingPlatform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+            currentMovingPlatform = null;
     }
 
     public void LockOnToTarget()
