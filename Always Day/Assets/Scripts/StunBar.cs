@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class StunBar : MonoBehaviour
 {
     public Image stunBarImg;
+    public GameObject starsFX;
 
     public float StunBarValue { get; set; } = 0.0f;
+
+    private GhostController _ghost;
 
     // Start is called before the first frame update
     void Awake()
     {
         stunBarImg.enabled = false;
+        _ghost = this.gameObject.GetComponentInParent<GhostController>();
     }
 
     // Update is called once per frame
@@ -30,7 +34,9 @@ public class StunBar : MonoBehaviour
         {
             stunBarImg.fillAmount = 0.0f;
             stunBarImg.enabled = false;
-            Debug.Log("Stun Enemy spell");
+            _ghost.CurrentState = new StunnedState(_ghost);
+            GameObject stars = Instantiate(starsFX, _ghost.GetComponent<Transform>().position + new Vector3(0, 7.0f, 0), Quaternion.identity, _ghost.GetComponent<Transform>());
+            Destroy(stars, 5.0f);
         }
     }
 }

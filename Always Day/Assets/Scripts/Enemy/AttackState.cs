@@ -11,11 +11,11 @@ public abstract class AttackState : BaseEnemyState
     public override void OnEnter()
     {
         Debug.Log("Start attacking!");
+        _controller.GetComponent<Animator>().Play("Ghost_Attack");
     }
 
     public override void Update()
     {
-
         if (!_controller.isPlayerInAttackRange())
         {
             _controller.CurrentState = new ChaseState(_controller);
