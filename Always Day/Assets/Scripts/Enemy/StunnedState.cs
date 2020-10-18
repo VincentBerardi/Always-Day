@@ -29,6 +29,12 @@ public class StunnedState : BaseEnemyState
     {
         if (_timer >= _stunnedTime)
         {
+            if (_controller.ghostType == GhostController.GhostType.DUMMY)
+            {
+                _controller.CurrentState = new IdleState(_controller);
+                return;
+            }
+
             _controller.CurrentState = new PatrolState(_controller);
         }
 

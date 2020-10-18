@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 forward, right;
-    public Animator animator; 
+    public Animator animator;
 
     [SerializeField]
     private float moveSpeed = 4f;
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
 
     //For lock-on system
     private GhostController lockOnTarget;
-    public StunBar stunBar;
+    private StunBar _currentStuntBar;
+    public StunBar[] ghostsStunBars;
     public float stunBarIncrement;
 
     public Transform currentMovingPlatform;
@@ -108,14 +109,18 @@ public class PlayerController : MonoBehaviour
         Physics.SphereCast(Camera.main.ScreenPointToRay(Input.mousePosition), 1f, out rayHit);
         if (lockOnTarget = rayHit.collider.GetComponent<GhostController>())
         {
+            _currentStuntBar = lockOnTarget.GetComponentInChildren<StunBar>();
             transform.LookAt(new Vector3(lockOnTarget.transform.position.x, transform.position.y, lockOnTarget.transform.position.z));
-            stunBar.stunBarImg.enabled = true;
-            stunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);         
+            _currentStuntBar.StunBarImg.enabled = true;
+            _currentStuntBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
         }
         else
         {
-            stunBar.stunBarImg.fillAmount = 0.0f;
-            stunBar.stunBarImg.enabled = false;
+            foreach (StunBar stunBar in ghostsStunBars)
+            {
+                stunBar.StunBarImg.fillAmount = 0.0f;
+                stunBar.StunBarImg.enabled = false;
+            }
         }
     }
 }

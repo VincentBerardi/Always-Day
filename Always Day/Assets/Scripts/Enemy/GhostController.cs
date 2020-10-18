@@ -54,6 +54,11 @@ public class GhostController : StateMachine
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.isKinematic = false;
 
+        if (ghostType == GhostType.DUMMY)
+        {
+            this.CurrentState = new IdleState(this);
+            return;
+        }
         this.CurrentState = new PatrolState(this);
     }
 

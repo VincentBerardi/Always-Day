@@ -8,7 +8,6 @@ public class InputHandler : MonoBehaviour
     private PlayerController playerController;
 
     //For logic of stun bar progress
-    public StunBar stunBar;
 
     void Awake()
     {
@@ -42,8 +41,11 @@ public class InputHandler : MonoBehaviour
                 playerController.LockOnToTarget();
             else
             {
-                stunBar.stunBarImg.fillAmount = 0.0f;
-                stunBar.stunBarImg.enabled = false;
+                foreach (StunBar stunBar in playerController.ghostsStunBars)
+                {
+                    stunBar.StunBarImg.fillAmount = 0.0f;
+                    stunBar.StunBarImg.enabled = false;
+                }
             }
         }
     }
