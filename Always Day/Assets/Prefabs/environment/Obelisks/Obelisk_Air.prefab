@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb14aaf7415a7044e83362f84d928eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAbsorb: {fileID: 0}
+  lightAbsorb: {fileID: 7237091672002594467}
   canAbsorb: 0
 --- !u!1 &4175723014568090586
 GameObject:
