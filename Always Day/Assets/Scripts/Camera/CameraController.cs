@@ -19,6 +19,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _angle;
     public float Angle { get { return _angle; } set { _angle = value; } }
 
+    void Awake()
+    {
+        player = GameObject.Find("Player");
+    }
+
     void Start()
     {
         _camera = Camera.main.gameObject;
