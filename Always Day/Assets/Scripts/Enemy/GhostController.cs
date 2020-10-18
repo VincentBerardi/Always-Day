@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GhostController : StateMachine
 {
-    public enum GhostType { Red, Green, Blue };
+    public enum GhostType { RED, GREEN, BLUE, DUMMY };
     public GhostType ghostType;
 
     public NavMeshAgent agent;
@@ -54,6 +54,11 @@ public class GhostController : StateMachine
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.isKinematic = false;
 
+        if (ghostType == GhostType.DUMMY)
+        {
+            this.CurrentState = new IdleState(this);
+            return;
+        }
         this.CurrentState = new PatrolState(this);
     }
 

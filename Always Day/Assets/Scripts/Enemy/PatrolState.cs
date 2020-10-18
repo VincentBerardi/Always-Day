@@ -12,6 +12,7 @@ public class PatrolState : BaseEnemyState
     public override void OnEnter()
     {
         Debug.Log("Start patroling!");
+        _controller.GetComponent<Animator>().Play("Ghost_Idle");
     }
 
     public override void Update()

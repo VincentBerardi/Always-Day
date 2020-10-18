@@ -11,6 +11,7 @@ public class ChaseState : BaseEnemyState
     public override void OnEnter()
     {
         Debug.Log("Start chasing!");
+        _controller.GetComponent<Animator>().Play("Ghost_Idle");
     }
     public override void Update()
     {
@@ -25,13 +26,13 @@ public class ChaseState : BaseEnemyState
         {
             switch (_controller.ghostType)
             {
-                case GhostController.GhostType.Red:
+                case GhostController.GhostType.RED:
                     _controller.CurrentState = new RedGhostAttackState(_controller);
                     break;
-                case GhostController.GhostType.Blue:
+                case GhostController.GhostType.BLUE:
                     _controller.CurrentState = new BlueGhostAttackState(_controller);
                     break;
-                case GhostController.GhostType.Green:
+                case GhostController.GhostType.GREEN:
                     _controller.CurrentState = new GreenGhostAttackState(_controller);
                     break;
             }
