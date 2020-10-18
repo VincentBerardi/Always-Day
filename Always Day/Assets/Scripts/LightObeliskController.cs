@@ -9,22 +9,25 @@ public class LightObeliskController : MonoBehaviour
     Vector3 lightObeliskPos;
     public float emissionIntensity;
     public float emissionLossRate;
+    public string name;
+    public BigLightObeliskController bigLightObelisk;
 
     public Renderer renderer;
 
     public Material mat;
     Color color;
-
-    //If decide to add-on bar later
-    //public LightAbsorbBar lightAbsorbBar;
+    Light pointLight;
+    float pointLightLossRate;
 
     // Start is called before the first frame update
     void Start()
     {
-        emissionLossRate = 0.1f;
+        emissionLossRate = 0.25f;
         lightObeliskPos = transform.position;
         color = mat.color;
-        emissionIntensity = 3.416924f;
+        pointLight = GetComponent<Light>();
+        pointLightLossRate = 0.15f;
+        emissionIntensity = 3.0f;
     }
 
     // Update is called once per frame
@@ -46,16 +49,28 @@ public class LightObeliskController : MonoBehaviour
 
     private void DecrementEmissionLight()
     {
-        //If decide to add-on bar later
-        //float amountOfLightAbsorbed = 5.0f * Time.deltaTime;
-        //lightAbsorbBar.enabled = true;
-        //lightAbsorbBar.LightAbsorbBarProgress(amountOfLightAbsorbed);
-
-        if (emissionIntensity > 0.8f)
+        if (emissionIntensity > 0.0f)
         {
             emissionIntensity -= Time.deltaTime * emissionLossRate;
+            pointLight.range -= Time.deltaTime * pointLightLossRate;
+            pointLight.intensity -= Time.deltaTime * pointLightLossRate;
             renderer.material.SetColor("_EmissionColor", color * emissionIntensity);
             renderer.UpdateGIMaterials();
+        }
+        else 
+        {
+            switch (name)
+            {
+                case "Red":
+                    bigLightObelisk.isRedLightActivated = true;
+                    break;
+                case "Blue":
+                    bigLightObelisk.isBlueLightActivated = true;
+                    break;
+                case "Green":
+                    bigLightObelisk.isGreenLightActivated = true;
+                    break;
+            }
         }
     }
 
