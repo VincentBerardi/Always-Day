@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     [SerializeField]
     public bool isStunned = false;
+    [SerializeField]
+    public bool isDead = false;
 
     //For lock-on system
     private GhostController lockOnTarget;
@@ -43,21 +45,24 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
-        Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
-
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-        transform.forward = heading;
-
-        if (!isStunned)
+        if (!isDead)
         {
-            transform.position += rightMovement;
-            transform.position += upMovement;
+            Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
+            Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
+
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+            transform.forward = heading;
+
+            if (!isStunned)
+            {
+                transform.position += rightMovement;
+                transform.position += upMovement;
+            }
         }
     }
     public void Jump()
     {
-        if (isGrounded && !isStunned)
+        if (isGrounded && !isStunned && !isDead)
         {
             transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
@@ -102,6 +107,21 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
             currentMovingPlatform = null;
+    }
+
+    public void Die(Vector3 respawnPoint)
+    {
+        isDead = true;
+        rb.useGravity = false;
+        StartCoroutine(RespawnCountdown(respawnPoint));
+    }
+    private IEnumerator RespawnCountdown(Vector3 respawnPoint)
+    {
+        yield return new WaitForSeconds(2f);
+        rb.useGravity = true;
+        transform.position = respawnPoint;
+        yield return new WaitForSeconds(0.5f);
+        isDead = false;
     }
 
     public void LockOnToTarget()
