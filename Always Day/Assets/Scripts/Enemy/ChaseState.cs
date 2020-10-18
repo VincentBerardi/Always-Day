@@ -23,8 +23,18 @@ public class ChaseState : BaseEnemyState
 
         if (_controller.isPlayerInAttackRange())
         {
-            _controller.CurrentState = new AttackState(_controller);
-            return;
+            switch (_controller.ghostType)
+            {
+                case GhostController.GhostType.Red:
+                    _controller.CurrentState = new RedGhostAttackState(_controller);
+                    break;
+                case GhostController.GhostType.Blue:
+                    _controller.CurrentState = new BlueGhostAttackState(_controller);
+                    break;
+                case GhostController.GhostType.Green:
+                    _controller.CurrentState = new GreenGhostAttackState(_controller);
+                    break;
+            }
         }
 
         _controller.agent.SetDestination(_controller.player.position);
