@@ -21,14 +21,21 @@ public class PlayerController : MonoBehaviour
 
     //For lock-on system
     private GhostController lockOnTarget;
-    private StunBar _currentStuntBar;
+    private StunBar _currentStunBar;
     public StunBar[] ghostsStunBars;
     public float stunBarIncrement;
+    public GameObject electricity;
 
     public Transform currentMovingPlatform;
 
+    private AudioManager audioManager;
+
     void Awake()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioManager.Play("world");
+        electricity.SetActive(false);
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
 
@@ -61,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && !isStunned && !isDead)
         {
+            audioManager.Play("jump");
             transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
@@ -109,6 +117,7 @@ public class PlayerController : MonoBehaviour
    
     public void Die(Vector3 respawnPoint)
     {
+        audioManager.Play("death");
         isDead = true;
         rb.useGravity = false;
         StartCoroutine(RespawnCountdown(respawnPoint));
@@ -144,15 +153,26 @@ public class PlayerController : MonoBehaviour
         Physics.SphereCast(Camera.main.ScreenPointToRay(Input.mousePosition), 1f, out rayHit);
         if (lockOnTarget = rayHit.collider.GetComponent<GhostController>())
         {
-            _currentStuntBar = lockOnTarget.GetComponentInChildren<StunBar>();
+            electricity.SetActive(true);
+            electricity.transform.rotation = Quaternion.RotateTowards(electricity.transform.rotation, this.transform.rotation, 10);
+
+            _currentStunBar = lockOnTarget.GetComponentInChildren<StunBar>();
+            animator.SetBool("isAttacking", true);
             transform.LookAt(new Vector3(lockOnTarget.transform.position.x, transform.position.y, lockOnTarget.transform.position.z));
-            _currentStuntBar.StunBarImg.enabled = true;
-            _currentStuntBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
+            _currentStunBar.StunBarImg.enabled = true;
+            _currentStunBar.StunBarProgress(stunBarIncrement * Time.deltaTime);
         }
         else
         {
+            animator.SetBool("isAttacking", false);
+            electricity.SetActive(false);
             foreach (StunBar stunBar in ghostsStunBars)
             {
+                if (!stunBar.StunBarImg)
+                {
+                    continue;
+                }
+
                 stunBar.StunBarImg.fillAmount = 0.0f;
                 stunBar.StunBarImg.enabled = false;
             }
