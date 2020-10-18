@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BigLightObeliskController : MonoBehaviour
 {
@@ -54,5 +55,16 @@ public class BigLightObeliskController : MonoBehaviour
             greenWall.SetActive(true);
         }
 
+        if (isRedLightActivated && isBlueLightActivated && isGreenLightActivated)
+        {
+            StartCoroutine(WinningSceneCountdown());
+        }
+
+    }
+
+    private IEnumerator WinningSceneCountdown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("WinningScene");
     }
 }
