@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
             currentMovingPlatform = null;
     }
 
+   
     public void Die(Vector3 respawnPoint)
     {
         isDead = true;
@@ -115,6 +116,20 @@ public class PlayerController : MonoBehaviour
     private IEnumerator RespawnCountdown(Vector3 respawnPoint)
     {
         yield return new WaitForSeconds(2f);
+        rb.useGravity = true;
+        transform.position = respawnPoint;
+        yield return new WaitForSeconds(0.5f);
+        isDead = false;
+    }
+
+    public void Teleport(Vector3 respawnPoint)
+    {
+        StartCoroutine(TeleportCountdown(respawnPoint));
+    }
+
+    private IEnumerator TeleportCountdown(Vector3 respawnPoint)
+    {
+        yield return new WaitForSeconds(1f);
         rb.useGravity = true;
         transform.position = respawnPoint;
         yield return new WaitForSeconds(0.5f);
