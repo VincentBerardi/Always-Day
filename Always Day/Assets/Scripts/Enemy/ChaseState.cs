@@ -26,13 +26,13 @@ public class ChaseState : BaseEnemyState
         {
             switch (_controller.ghostType)
             {
-                case GhostController.GhostType.Red:
+                case GhostController.GhostType.RED:
                     _controller.CurrentState = new RedGhostAttackState(_controller);
                     break;
-                case GhostController.GhostType.Blue:
+                case GhostController.GhostType.BLUE:
                     _controller.CurrentState = new BlueGhostAttackState(_controller);
                     break;
-                case GhostController.GhostType.Green:
+                case GhostController.GhostType.GREEN:
                     _controller.CurrentState = new GreenGhostAttackState(_controller);
                     break;
             }

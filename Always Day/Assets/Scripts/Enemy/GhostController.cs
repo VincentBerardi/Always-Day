@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GhostController : StateMachine
 {
-    public enum GhostType { Red, Green, Blue };
+    public enum GhostType { RED, GREEN, BLUE, DUMMY };
     public GhostType ghostType;
 
     public NavMeshAgent agent;

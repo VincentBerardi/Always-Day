@@ -8,8 +8,11 @@ public class StunnedState : BaseEnemyState
     private float _stunnedTime = 5.0f;
     private float _timer = 0.0f;
 
-    public StunnedState(GhostController controller) : base(controller)
+    private GameObject _starsFX;
+
+    public StunnedState(GhostController controller, GameObject starsFX) : base(controller)
     {
+        _starsFX = starsFX;
     }
 
     public override void OnEnter()
@@ -17,6 +20,9 @@ public class StunnedState : BaseEnemyState
         Debug.Log("Entered the stunned state!");
         _controller.GetComponent<Animator>().Play("Ghost_Stunned");
         _controller.GetComponent<NavMeshAgent>().isStopped = true;
+
+        GameObject stars = GhostController.Instantiate(_starsFX, _controller.GetComponent<Transform>().position + new Vector3(0, 7.0f, 0), Quaternion.identity, _controller.GetComponent<Transform>());
+        GhostController.Destroy(stars, _stunnedTime);
     }
 
     public override void Update()

@@ -34,9 +34,7 @@ public class StunBar : MonoBehaviour
         {
             stunBarImg.fillAmount = 0.0f;
             stunBarImg.enabled = false;
-            _ghost.CurrentState = new StunnedState(_ghost);
-            GameObject stars = Instantiate(starsFX, _ghost.GetComponent<Transform>().position + new Vector3(0, 7.0f, 0), Quaternion.identity, _ghost.GetComponent<Transform>());
-            Destroy(stars, 5.0f);
+            _ghost.CurrentState = new StunnedState(_ghost, starsFX);
         }
     }
 }
