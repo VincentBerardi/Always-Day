@@ -13,6 +13,8 @@ public class LightObeliskController : MonoBehaviour
     public string name;
     public BigLightObeliskController bigLightObelisk;
     public GameObject lightAbsorb;
+    public GameObject mainSpawnPoint;
+    public PlayerController player;
 
     public Renderer renderer;
 
@@ -69,12 +71,15 @@ public class LightObeliskController : MonoBehaviour
             {
                 case "Red":
                     bigLightObelisk.isRedLightActivated = true;
+                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
                 case "Blue":
                     bigLightObelisk.isBlueLightActivated = true;
+                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
                 case "Green":
                     bigLightObelisk.isGreenLightActivated = true;
+                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
             }
         }
