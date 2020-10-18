@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
             currentMovingPlatform = null;
     }
 
-   
+
     public void Die(Vector3 respawnPoint)
     {
         isDead = true;
@@ -147,6 +147,13 @@ public class PlayerController : MonoBehaviour
         Physics.SphereCast(Camera.main.ScreenPointToRay(Input.mousePosition), 1f, out rayHit);
         if (lockOnTarget = rayHit.collider.GetComponent<GhostController>())
         {
+            if (lockOnTarget.CurrentState.GetType() == typeof(StunnedState))
+            {
+                animator.SetBool("isAttacking", false);
+                electricity.SetActive(false);
+                return;
+            }
+
             electricity.SetActive(true);
             electricity.transform.rotation = Quaternion.RotateTowards(electricity.transform.rotation, this.transform.rotation, 10);
 

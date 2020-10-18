@@ -17,5 +17,12 @@ public class ExpandingRing : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        Debug.Log("HITS ME");
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            player.Die(GameObject.Find("GreenRestart 2").gameObject.transform.position);
+        }
     }
 }

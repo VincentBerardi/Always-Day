@@ -23,7 +23,7 @@ public class GreenGhostAttackState : AttackState
 
     public override void ShootProjectile()
     {
-        Vector3 newRingPos = new Vector3(_controller.transform.position.x, _controller.transform.position.y + 0.5f, _controller.transform.position.z);
+        Vector3 newRingPos = new Vector3(_controller.transform.position.x, _controller.transform.position.y + 1.0f, _controller.transform.position.z);
         GameObject newRing = GhostController.Instantiate(_controller.greenProjectileAttack, newRingPos, Quaternion.Euler(-90, 0, 0));
         resetAttack();
     }

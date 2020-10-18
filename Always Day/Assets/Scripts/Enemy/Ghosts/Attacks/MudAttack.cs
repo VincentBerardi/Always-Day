@@ -12,6 +12,10 @@ public class MudAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("MUD!!!");
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+            player.GetStunned();
+        }
     }
 }

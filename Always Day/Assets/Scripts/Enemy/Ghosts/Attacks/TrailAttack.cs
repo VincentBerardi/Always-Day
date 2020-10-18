@@ -16,5 +16,10 @@ public class TrailAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            player.Die(GameObject.Find("BlueRestart 2").transform.position);
+        }
     }
 }

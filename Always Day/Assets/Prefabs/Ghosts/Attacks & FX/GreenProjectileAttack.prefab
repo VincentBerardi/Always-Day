@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6164140094054194153}
   - component: {fileID: 6823630007825837576}
   m_Layer: 0
-  m_Name: GreenRingAttack
+  m_Name: GreenProjectileAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3738,7 +3738,7 @@ ParticleSystem:
     quality: 0
     voxelSize: 0.5
     collisionMessages: 1
-    collidesWithDynamic: 0
+    collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
