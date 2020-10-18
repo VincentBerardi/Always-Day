@@ -65,6 +65,6 @@ public class BigLightObeliskController : MonoBehaviour
     private IEnumerator WinningSceneCountdown()
     {
         yield return new WaitForSeconds(5.0f);
-        SceneManager.LoadScene("WinningScene");
+        SceneManager.LoadScene("End Scene");
     }
 }

@@ -61,16 +61,16 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: menu
     clip: {fileID: 8300000, guid: 451db0e1a6405f349883ac8c0eb3c98d, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     source: {fileID: 0}
   - name: world
     clip: {fileID: 8300000, guid: 07c8dc429b718b44cbd3dc2133f0cd27, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     source: {fileID: 0}
   - name: end
     clip: {fileID: 8300000, guid: 9b22380104a6d8444b1207db85766af0, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     source: {fileID: 0}

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioManager audioManager;
 
-    void Awake()
+    void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         audioManager.Play("world");

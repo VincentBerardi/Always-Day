@@ -8,8 +8,8 @@ public class DropShadow : MonoBehaviour
 
     private void Start()
     {
-        _dropShadow = GameObject.Find("DropShadow");
-        _dropShadow.SetActive(false);
+        //_dropShadow = GameObject.Find("DropShadow");
+        //_dropShadow.SetActive(false);
     }
     // Update is called once per frame
     void Update()
