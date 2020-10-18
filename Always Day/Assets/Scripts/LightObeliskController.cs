@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightObeliskController : MonoBehaviour
@@ -11,6 +12,7 @@ public class LightObeliskController : MonoBehaviour
     public float emissionLossRate;
     public string name;
     public BigLightObeliskController bigLightObelisk;
+    public GameObject lightAbsorb;
 
     public Renderer renderer;
 
@@ -43,7 +45,10 @@ public class LightObeliskController : MonoBehaviour
         foreach (Collider cd in colliders)
         {
             if (cd.gameObject.GetComponent<PlayerController>())
+            {
                 DecrementEmissionLight();
+                break;
+            }
         }
     }
 
@@ -59,6 +64,7 @@ public class LightObeliskController : MonoBehaviour
         }
         else 
         {
+            lightAbsorb.SetActive(false);
             switch (name)
             {
                 case "Red":

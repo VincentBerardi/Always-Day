@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 265745049626600}
   - component: {fileID: 2874430126493815586}
   - component: {fileID: 4749582122819567046}
+  - component: {fileID: -1211439550391618633}
   m_Layer: 0
   m_Name: Obelisk_All
   m_TagString: Untagged
@@ -236,12 +237,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac646f71642e044ab1eba933522c978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRedLightActivated: 0
+  isRedLightActivated: 1
   isBlueLightActivated: 0
   isGreenLightActivated: 0
   redSphere: {fileID: 2402681313824502942}
   blueSphere: {fileID: 7823732129009413766}
   greenSphere: {fileID: 4411884106928713261}
+  redWall: {fileID: 0}
+  blueWall: {fileID: 0}
+  greenWall: {fileID: 0}
+--- !u!64 &-1211439550391618633
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387907400262742775}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3093455251823439261, guid: b05e358e2bcceb04f8f40a056ce7f9f7, type: 3}
 --- !u!1 &4411884106928713261
 GameObject:
   m_ObjectHideFlags: 0
