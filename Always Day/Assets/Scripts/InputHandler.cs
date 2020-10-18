@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InputHandler : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
         CheckInputs();
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Main Scene 2");
     }
 
     void CheckInputs()
