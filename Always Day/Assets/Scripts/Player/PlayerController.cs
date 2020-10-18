@@ -28,8 +28,12 @@ public class PlayerController : MonoBehaviour
 
     public Transform currentMovingPlatform;
 
+    private AudioManager audioManager;
+
     void Awake()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioManager.Play("world");
         electricity.SetActive(false);
 
         rb = GetComponent<Rigidbody>();
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && !isStunned && !isDead)
         {
+            audioManager.Play("jump");
             transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
@@ -112,6 +117,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die(Vector3 respawnPoint)
     {
+        audioManager.Play("death");
         isDead = true;
         rb.useGravity = false;
         StartCoroutine(RespawnCountdown(respawnPoint));
