@@ -41,8 +41,15 @@ public class InputHandler : MonoBehaviour
                 playerController.LockOnToTarget();
             else
             {
+                playerController.animator.SetBool("isAttacking", false);
+                playerController.electricity.SetActive(false);
                 foreach (StunBar stunBar in playerController.ghostsStunBars)
                 {
+                    if (!stunBar.StunBarImg)
+                    {
+                        continue;
+                    }
+
                     stunBar.StunBarImg.fillAmount = 0.0f;
                     stunBar.StunBarImg.enabled = false;
                 }
