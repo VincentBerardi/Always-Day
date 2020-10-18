@@ -10,10 +10,12 @@ public class TornadoSpin : MonoBehaviour
     public GameObject player;
     public float chaseSpeed = 7.0f;
     private bool _shouldChase = true;
+    private Vector3 _playerInitPos;
 
     private void Start()
     {
         player = GameObject.Find("Player");
+        _playerInitPos = player.transform.position;
         Destroy(this.GetComponentInParent<Transform>().gameObject, 10.0f);
     }
 
