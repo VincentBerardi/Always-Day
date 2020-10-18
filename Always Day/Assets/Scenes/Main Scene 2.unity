@@ -2065,7 +2065,7 @@ PrefabInstance:
     - target: {fileID: 2861152181240799434, guid: d0ce794216d0d5141bf695b9442dc46d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2861152181240799434, guid: d0ce794216d0d5141bf695b9442dc46d,
         type: 3}
@@ -2725,7 +2725,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &281829925
 PrefabInstance:
@@ -21462,7 +21462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a54b4b80a927a4d8d27c2a251c3db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunBarImg: {fileID: 475875036}
+  stunbarCanvas: {fileID: 0}
+  starsFX: {fileID: 0}
 --- !u!1001 &1555810132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29435,7 +29436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2036243614
 PrefabInstance:
@@ -29587,7 +29588,7 @@ PrefabInstance:
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
