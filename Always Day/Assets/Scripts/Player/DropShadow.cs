@@ -21,8 +21,10 @@ public class DropShadow : MonoBehaviour
             return;
         }
 
+        _dropShadow.SetActive(false);
+
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, -Vector3.up, out hit, 100f))
+        if (Physics.Raycast(this.transform.position, -Vector3.up, out hit, 3.0f))
         {
             _dropShadow.SetActive(true);
             _dropShadow.transform.position = hit.point + new Vector3(0, 0.2f, 0);
