@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Main Scene 2");
+        SceneManager.LoadScene("Main Scene");
     }
 
     void CheckInputs()
