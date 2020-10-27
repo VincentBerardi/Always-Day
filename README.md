@@ -1,5 +1,5 @@
 # Always Day
-<img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk3NTYucG5n/original/h9g%2BVw.png width="340" height="214"/> <img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk1MDEucG5n/347x500/NwOHDu.png width="320" height="214"/> <img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk3NjUucG5n/347x500/hUTAtN.png width="320" height="214"/>
+<img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk3NTYucG5n/original/h9g%2BVw.png width="320" height="214"/> <img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk1MDEucG5n/347x500/NwOHDu.png width="320" height="214"/> <img src=https://img.itch.zone/aW1hZ2UvNzkyODU5LzQ0Mzk3NjUucG5n/347x500/hUTAtN.png width="320" height="214"/>
 **Download and Play:** https://ohmz19.itch.io/always-day 
 
 ## Introduction
