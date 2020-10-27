@@ -44,4 +44,6 @@ Animator:
   - Path-Creator - https://github.com/SebLague/Path-Creator
   - Particle Ribbon - https://assetstore.unity.com/packages/vfx/particles/spells/particle-ribbon-42866
   - Electricity - https://www.youtube.com/watch?v=RdNnbozAPGQ
-
+  - FREE Stylized PBR Textures Pack - https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-pbr-textures-pack-111778
+  - Isometric movement tutorial (heavily adapted) - https://www.studica.com/blog/isometric-camera-unity
+  - LowPoly Water - https://assetstore.unity.com/packages/tools/particles-effects/lowpoly-water-107563
