@@ -6,7 +6,7 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NewLayer 1
+  m_Name: Volcanic
   m_DiffuseTexture: {fileID: 2800000, guid: 9ffff4db623f26d4986ce44d12d8f813, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: f0fb6f72ba4e0414bbbe1b2e0f36de34, type: 3}
   m_MaskMapTexture: {fileID: 0}
