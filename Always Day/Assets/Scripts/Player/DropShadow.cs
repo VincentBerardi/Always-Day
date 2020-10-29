@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class DropShadow : MonoBehaviour
 {
-    private GameObject _dropShadow;
+    public GameObject _dropShadow;
 
     private void Start()
     {
-        //_dropShadow = GameObject.Find("DropShadow");
-        //_dropShadow.SetActive(false);
+        _dropShadow = Instantiate(_dropShadow, Vector3.zero, Quaternion.identity);
+        _dropShadow.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
 
-        // if (GetComponent<PlayerController>().isGrounded)
-        // {
-        //     _dropShadow.SetActive(false);
-        //     return;
-        // }
+        if (GetComponent<PlayerController>().isGrounded)
+        {
+            _dropShadow.SetActive(false);
+            return;
+        }
 
-        // RaycastHit hit;
-        // if (Physics.Raycast(new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z), -Vector3.up, out hit, 1f))
-        // {
-        //     Debug.DrawRay(this.transform.position, -Vector3.up * hit.distance, Color.yellow, Mathf.Infinity);
-        //     _dropShadow.SetActive(true);
-        //     _dropShadow.transform.position = new Vector3(this.transform.position.x, hit.transform.position.y, this.transform.position.z);
-        // }
+        _dropShadow.SetActive(false);
+
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, -Vector3.up, out hit, 3.0f))
+        {
+            _dropShadow.SetActive(true);
+            _dropShadow.transform.position = hit.point + new Vector3(0, 0.2f, 0);
+        }
     }
 }
