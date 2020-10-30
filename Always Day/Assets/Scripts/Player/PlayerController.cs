@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     public bool isStunned = false;
     public bool isDead = false;
+    public bool gotLight = false;
 
     //For lock-on system
     private GhostController lockOnTarget;
@@ -119,10 +120,13 @@ public class PlayerController : MonoBehaviour
 
     public void Die(Vector3 respawnPoint)
     {
-        audioManager.Play("death");
-        isDead = true;
-        rb.useGravity = false;
-        StartCoroutine(RespawnCountdown(respawnPoint));
+        if (!gotLight)
+        {
+            audioManager.Play("death");
+            isDead = true;
+            rb.useGravity = false;
+            StartCoroutine(RespawnCountdown(respawnPoint));
+        }
     }
     private IEnumerator RespawnCountdown(Vector3 respawnPoint)
     {
@@ -133,18 +137,21 @@ public class PlayerController : MonoBehaviour
         isDead = false;
     }
 
-    public void Teleport(Vector3 respawnPoint)
+    public void Teleport(Vector3 teleportPoint)
     {
-        StartCoroutine(TeleportCountdown(respawnPoint));
+        //transform.position = teleportPoint;
+        StartCoroutine(TeleportCountdown(teleportPoint));
     }
 
-    private IEnumerator TeleportCountdown(Vector3 respawnPoint)
+    private IEnumerator TeleportCountdown(Vector3 teleportPoint)
     {
-        yield return new WaitForSeconds(1f);
-        rb.useGravity = true;
-        transform.position = respawnPoint;
-        yield return new WaitForSeconds(0.5f);
-        isDead = false;
+        //yield return new WaitForSeconds(1f);      //causes collisions when teleported back
+        yield return new WaitForSeconds(0.25f);     //seems to be a good in between
+        //yield return new WaitForSeconds(0.1f);    //still a fast transition
+        //yield return null;                        //fast transition
+        transform.position = teleportPoint;
+        //yield return new WaitForSeconds(0.5f);
+        gotLight = false;
     }
 
     public void LockOnToTarget()
