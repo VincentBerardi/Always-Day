@@ -15048,7 +15048,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383586227}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.061, y: -0.080524996, z: -1.4524001}
+  m_LocalPosition: {x: -0.061, y: -0.051, z: -1.4524001}
   m_LocalScale: {x: 4.2136154, y: 4.213615, z: 4.2136154}
   m_Children:
   - {fileID: 1057914240}
@@ -21249,10 +21249,16 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -0.849432, y: -4.8593063, z: -0.9534607}
-      - {x: -0.66397095, y: -4.3550415, z: -0.743515}
-      - {x: 4.958866, y: 5.7482452, z: -5.1150665}
-      - {x: 5.9445343, y: 6.0959435, z: -5.4945526}
+      - {x: -0.795763, y: -5.9941444, z: -1.0019226}
+      - {x: -0.69773495, y: -5.727608, z: -0.8909529}
+      - {x: 8.512089, y: -0.5932822, z: 0.1830219}
+      - {x: 12.782272, y: 4.334408, z: -1.6163025}
+      - {x: 15.312567, y: 7.2543077, z: -2.682491}
+      - {x: 17.473377, y: 9.346598, z: -3.9202929}
+      - {x: 17.456825, y: 11.619087, z: -5.421097}
+      - {x: 17.448463, y: 12.767199, z: -6.179336}
+      - {x: 15.421791, y: 16.92651, z: -7.8229475}
+      - {x: 15.577759, y: 16.98153, z: -7.8829956}
       isClosed: 0
       space: 0
       controlMode: 0
@@ -21264,9 +21270,11 @@ MonoBehaviour:
       perAnchorNormalsAngle:
       - 0
       - 0
+      - 0
+      - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -24146,11 +24154,11 @@ MonoBehaviour:
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
+    showDisplayOptions: 1
     showPathOptions: 1
     showVertexPathDisplayOptions: 0
     showVertexPathOptions: 1
-    showNormals: 0
+    showNormals: 1
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
@@ -42771,17 +42779,17 @@ PrefabInstance:
     - target: {fileID: 3448541137454053031, guid: c732660684969cb43877b164de948d7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.193
+      value: 26.55
       objectReference: {fileID: 0}
     - target: {fileID: 3448541137454053031, guid: c732660684969cb43877b164de948d7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.405
+      value: -153.71
       objectReference: {fileID: 0}
     - target: {fileID: 3448541137454053031, guid: c732660684969cb43877b164de948d7e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.761
+      value: -98.33
       objectReference: {fileID: 0}
     - target: {fileID: 3448541137454053031, guid: c732660684969cb43877b164de948d7e,
         type: 3}
@@ -67616,8 +67624,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -3.2678454, y: 0, z: 0.117009394}
-      - {x: -2.2678454, y: 0.5, z: 0.117009394}
+      - {x: -16.675577, y: -0.038774487, z: 12.400526}
+      - {x: -15.675577, y: 0.4612255, z: 12.400526}
       - {x: 22.451939, y: -0.87504184, z: -10.7980995}
       - {x: 23.45193, y: -0.3750419, z: -10.798092}
       isClosed: 0
@@ -86892,9 +86900,12 @@ MonoBehaviour:
     _bezierPath:
       points:
       - {x: -2.804758, y: -5.49876, z: 0}
-      - {x: -1.8047581, y: -4.99876, z: 0}
-      - {x: 3.8516674, y: 13.856411, z: -2.6347046}
-      - {x: 4.6414814, y: 14.34927, z: -3.0169067}
+      - {x: -1.8771591, y: -5.0349607, z: 0}
+      - {x: 4.084203, y: 18.45697, z: -2.3850958}
+      - {x: 5.90106, y: 22.018063, z: -3.0135345}
+      - {x: 6.0428696, y: 22.296013, z: -3.0625854}
+      - {x: 10.079505, y: 23.909794, z: -3.5962753}
+      - {x: 10.136688, y: 23.945477, z: -3.6239471}
       isClosed: 0
       space: 0
       controlMode: 0
@@ -86904,6 +86915,7 @@ MonoBehaviour:
         m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 0, y: 0, z: 0}
       perAnchorNormalsAngle:
+      - 0
       - 0
       - 0
       globalNormalsAngle: 0
@@ -92426,27 +92438,27 @@ PrefabInstance:
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.800858
+      value: -146.31415
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.193
+      value: 31.55
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.031
+      value: -94.060005
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.13087614
+      value: -0.1308762
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8358315
+      value: 0.83583146
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
@@ -92456,7 +92468,7 @@ PrefabInstance:
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.4825676
+      value: -0.48256776
       objectReference: {fileID: 0}
     - target: {fileID: 5527641664977170046, guid: 6f43df81682d2a0beb4a7e688402db05,
         type: 3}
@@ -97948,7 +97960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 561962505}
   endOfPathInstruction: 1
-  speed: 2
+  speed: 4
 --- !u!4 &1848089151770609857
 Transform:
   m_ObjectHideFlags: 0
@@ -98078,7 +98090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 518860399}
   endOfPathInstruction: 1
-  speed: 3
+  speed: 5
 --- !u!1 &3857422143284179155
 GameObject:
   m_ObjectHideFlags: 0
@@ -98229,7 +98241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 1904785166}
   endOfPathInstruction: 1
-  speed: 3
+  speed: 5
 --- !u!33 &5110321899991473211
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98730,4 +98742,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 1225926992}
   endOfPathInstruction: 1
-  speed: 4
+  speed: 5
