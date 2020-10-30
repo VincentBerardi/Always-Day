@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightObeliskController : MonoBehaviour
 {
@@ -64,8 +60,7 @@ public class LightObeliskController : MonoBehaviour
             renderer.material.SetColor("_EmissionColor", color * emissionIntensity);
             renderer.UpdateGIMaterials();
         }
-        //else 
-        else if(!player.gotLight)
+        else
         {
             lightAbsorb.SetActive(false);
             switch (name)
@@ -73,17 +68,14 @@ public class LightObeliskController : MonoBehaviour
                 case "Red":
                     bigLightObelisk.isRedLightActivated = true;
                     player.gotLight = true;
-                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
                 case "Blue":
                     bigLightObelisk.isBlueLightActivated = true; 
                     player.gotLight = true;
-                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
                 case "Green":
                     bigLightObelisk.isGreenLightActivated = true;
                     player.gotLight = true;
-                    player.Teleport(mainSpawnPoint.transform.position);
                     break;
             }
         }

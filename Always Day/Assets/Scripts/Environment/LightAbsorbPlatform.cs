@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightAbsorbPlatform : MonoBehaviour
 {
@@ -24,15 +22,13 @@ public class LightAbsorbPlatform : MonoBehaviour
             lightAbsorb.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         player = other.gameObject.GetComponent<PlayerController>();
-        //if (other.gameObject.GetComponent<PlayerController>())
         if (player && !player.gotLight)
-        {
-            Debug.Log("in here");
             canAbsorb = true;
-        }
+        else
+            canAbsorb = false;
     }
     private void OnTriggerExit(Collider other)
     {
