@@ -12,11 +12,9 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 4f;
     [SerializeField]
     private float jumpForce = 6f;
-    [SerializeField]
+
     public bool isGrounded = true;
-    [SerializeField]
     public bool isStunned = false;
-    [SerializeField]
     public bool isDead = false;
 
     //For lock-on system
@@ -25,8 +23,9 @@ public class PlayerController : MonoBehaviour
     public StunBar[] ghostsStunBars;
     public float stunBarIncrement;
     public GameObject electricity;
-
-    public Transform currentMovingPlatform;
+    
+    [SerializeField]
+    private Transform currentMovingPlatform;
 
     private AudioManager audioManager;
 
@@ -69,7 +68,6 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && !isStunned && !isDead)
         {
             audioManager.Play("jump");
-            transform.parent = null;
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
             animator.SetBool("isGrounded", false);
@@ -110,8 +108,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+
         if (collision.gameObject.tag == "Platform")
+        {
             currentMovingPlatform = null;
+            transform.parent = null;
+        }
     }
 
 
