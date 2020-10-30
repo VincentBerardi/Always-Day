@@ -6,6 +6,8 @@ public class LightAbsorbPlatform : MonoBehaviour
 {
     public GameObject lightAbsorb;
     public bool canAbsorb;
+    private PlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,9 @@ public class LightAbsorbPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<PlayerController>())
+        player = other.gameObject.GetComponent<PlayerController>();
+        //if (other.gameObject.GetComponent<PlayerController>())
+        if (player && !player.gotLight)
         {
             Debug.Log("in here");
             canAbsorb = true;

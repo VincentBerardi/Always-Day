@@ -145,8 +145,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator TeleportCountdown(Vector3 teleportPoint)
     {
-        //yield return new WaitForSeconds(1f);      //causes collisions when teleported back
-        yield return new WaitForSeconds(0.25f);     //seems to be a good in between
+        yield return new WaitForSeconds(1f);      //causes collisions when teleported back
+        //yield return new WaitForSeconds(0.25f);     //seems to be a good in between
         //yield return new WaitForSeconds(0.1f);    //still a fast transition
         //yield return null;                        //fast transition
         transform.position = teleportPoint;

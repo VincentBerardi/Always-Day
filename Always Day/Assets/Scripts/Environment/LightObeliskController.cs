@@ -36,8 +36,6 @@ public class LightObeliskController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    //void FixedUpdate()
-    //void LateUpdate()
     {
         PlayerIsNearEnoughToAbsorbLight();
     }
@@ -66,7 +64,8 @@ public class LightObeliskController : MonoBehaviour
             renderer.material.SetColor("_EmissionColor", color * emissionIntensity);
             renderer.UpdateGIMaterials();
         }
-        else 
+        //else 
+        else if(!player.gotLight)
         {
             lightAbsorb.SetActive(false);
             switch (name)
