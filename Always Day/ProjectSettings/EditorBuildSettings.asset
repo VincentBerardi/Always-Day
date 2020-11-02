@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 0e0c33e66f14dd0f8bdbf01e63c57621
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Scene.unity
-    guid: 6e33e9f60161213409540c325c89b861
+    guid: 0d8df75c197933d419f22c70d7fc500f
+  - enabled: 1
+    path: Assets/Scenes/Personal/Omar.unity
+    guid: 15da85b9a70b3ce47a0cfa3951a8d025
   - enabled: 1
     path: Assets/Scenes/End Scene.unity
     guid: 29447161616116544b65e728ebf125ae
