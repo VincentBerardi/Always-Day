@@ -23,7 +23,7 @@ public class TeleportationPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerController>() && player.gotLight)
             player.Teleport(mainSpawnPoint.transform.position);
     }
 
