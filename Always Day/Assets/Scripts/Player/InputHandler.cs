@@ -17,6 +17,10 @@ public class InputHandler : MonoBehaviour
     [SerializeField]
     private GameObject _LoadingGroup;
 
+    // MAIN MENU / PAUSE MENU
+    [SerializeField]
+    private GameObject _OptionsGroup;
+
     // PAUSE MENU
     [SerializeField]
     private GameObject _PauseMenuGroup;
@@ -36,6 +40,10 @@ public class InputHandler : MonoBehaviour
 
         if (_LoadingGroup)
             _LoadingGroup.SetActive(false);
+
+        // MAIN/PAUSE MENU
+        if (_OptionsGroup)
+            _OptionsGroup.SetActive(false);
 
         // PAUSE MENU
         if (_PauseMenuGroup)
@@ -89,28 +97,32 @@ public class InputHandler : MonoBehaviour
 
             if (Input.GetKeyDown("escape") && _PauseMenuGroup)
             {
-                if (_PauseMenuGroup.activeSelf == false && _ControlsGroup.activeSelf == false)
+                if (!_PauseMenuGroup.activeSelf && !_ControlsGroup.activeSelf)
                 {
                     _PauseMenuGroup.SetActive(true);
                     Time.timeScale = 0f;
-                    AudioListener.pause = true;
+                    //AudioListener.pause = true;
                 }
 
-                else if (_PauseMenuGroup.activeSelf == false && _ControlsGroup.activeSelf == true)
+                else if (!_PauseMenuGroup.activeSelf && _ControlsGroup.activeSelf)
                 {
                     PauseControlsBack();
                 }
                 
-                else if (_PauseMenuGroup.activeSelf == true)
+                else if (_PauseMenuGroup.activeSelf)
                 {
                     PauseContinue();
                 }
             }
         }
 
-        if (Input.GetKeyDown("escape") && _MenuGroup && _CreditsGroup.activeSelf == true)
-        {
-            MenuCreditsBack();
+        if (Input.GetKeyDown("escape")) { 
+            
+            if(_MenuGroup && _CreditsGroup.activeSelf) 
+                MenuCreditsBack();
+
+            if ((_MenuGroup || _PauseMenuGroup) && _OptionsGroup.activeSelf)
+                OptionsBack();
         }
     }
 
@@ -135,10 +147,38 @@ public class InputHandler : MonoBehaviour
         _CreditsGroup.SetActive(false);
     }
 
-    // MAIN AND PAUSE MENU
+    // MAIN/PAUSE MENU
     public void MenuExit()
     {
         Application.Quit();
+    }
+
+    public void MenuOptions()
+    {
+        if (_MenuGroup)
+        {
+            _MenuGroup.SetActive(false);
+            _OptionsGroup.SetActive(true);
+        }
+        else if (_PauseMenuGroup)
+        {
+            _PauseMenuGroup.SetActive(false);
+            _OptionsGroup.SetActive(true);
+        }
+    }
+
+    public void OptionsBack()
+    {
+        if (_MenuGroup)
+        {
+            _MenuGroup.SetActive(true);
+            _OptionsGroup.SetActive(false);
+        }
+        else if (_PauseMenuGroup)
+        {
+            _PauseMenuGroup.SetActive(true);
+            _OptionsGroup.SetActive(false);
+        }
     }
 
     // PAUSE MENU
