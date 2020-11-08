@@ -14,6 +14,20 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            //s.source.volume = s.volume;
+            //s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            //s.source.bypassEffects = s.bypassEffects;
+        }
+
+        masterVolumeSlider.onValueChanged.AddListener(delegate { MasterVolumeChange(); });
+        musicVolumeSlider.onValueChanged.AddListener(delegate { MusicVolumeChange(); });
+        effectsVolumeSlider.onValueChanged.AddListener(delegate { EffectsVolumeChange(); });
+
         // Set audio slider defaults
         if (!PlayerPrefs.HasKey("MasterVolume"))
             masterVolumeSlider.value = 1f;
@@ -29,20 +43,6 @@ public class AudioManager : MonoBehaviour
             effectsVolumeSlider.value = 1f;
         else
             effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume");
-
-        masterVolumeSlider.onValueChanged.AddListener(delegate { MasterVolumeChange(); });
-        musicVolumeSlider.onValueChanged.AddListener(delegate { MusicVolumeChange(); });
-        effectsVolumeSlider.onValueChanged.AddListener(delegate { EffectsVolumeChange(); });
-
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            //s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            //s.source.bypassEffects = s.bypassEffects;
-        }
     }
 
     private void Update()
@@ -87,7 +87,7 @@ public class AudioManager : MonoBehaviour
     }
     public void MusicVolumeChange()
     {
-        PlayerPrefs.SetFloat("MusicVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
 
         foreach (Sound s in sounds)
         {
@@ -97,7 +97,7 @@ public class AudioManager : MonoBehaviour
     }
     public void EffectsVolumeChange()
     {
-        PlayerPrefs.SetFloat("EffectsVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeSlider.value);
 
         foreach (Sound s in sounds)
         {
