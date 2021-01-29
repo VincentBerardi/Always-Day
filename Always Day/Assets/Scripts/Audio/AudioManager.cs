@@ -2,10 +2,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
+    public Slider masterVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider effectsVolumeSlider;
 
     void Awake()
     {
@@ -13,11 +18,31 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume;
+            //s.source.volume = s.volume;
             //s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             //s.source.bypassEffects = s.bypassEffects;
         }
+
+        masterVolumeSlider.onValueChanged.AddListener(delegate { MasterVolumeChange(); });
+        musicVolumeSlider.onValueChanged.AddListener(delegate { MusicVolumeChange(); });
+        effectsVolumeSlider.onValueChanged.AddListener(delegate { EffectsVolumeChange(); });
+
+        // Set audio slider defaults
+        if (!PlayerPrefs.HasKey("MasterVolume"))
+            masterVolumeSlider.value = 1f;
+        else
+            masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+            musicVolumeSlider.value = 0.5f;
+        else
+            musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+
+        if (!PlayerPrefs.HasKey("EffectsVolume"))
+            effectsVolumeSlider.value = 1f;
+        else
+            effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume");
     }
 
     private void Update()
@@ -45,5 +70,39 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s != null)
             s.source.Stop();
+    }
+
+    public void MasterVolumeChange()
+    {
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
+
+        foreach (Sound s in sounds)
+        {
+            if (s.soundType == Sound.SoundType.Music)
+                s.source.volume = masterVolumeSlider.value * musicVolumeSlider.value;
+
+            if (s.soundType == Sound.SoundType.Effect)
+                s.source.volume = masterVolumeSlider.value * effectsVolumeSlider.value;
+        }
+    }
+    public void MusicVolumeChange()
+    {
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
+
+        foreach (Sound s in sounds)
+        {
+            if (s.soundType == Sound.SoundType.Music)
+                s.source.volume = masterVolumeSlider.value * musicVolumeSlider.value;
+        }
+    }
+    public void EffectsVolumeChange()
+    {
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeSlider.value);
+
+        foreach (Sound s in sounds)
+        {
+            if(s.soundType == Sound.SoundType.Effect)
+                s.source.volume = masterVolumeSlider.value * effectsVolumeSlider.value;
+        }
     }
 }

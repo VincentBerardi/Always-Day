@@ -47,30 +47,39 @@ MonoBehaviour:
   - name: jump
     clip: {fileID: 8300000, guid: 7edf983e38b03ae408bba30331075148, type: 3}
     volume: 1
+    soundType: 1
     loop: 0
     source: {fileID: 0}
   - name: death
     clip: {fileID: 8300000, guid: cadf9d5e42710fc4fb7a30bc7846cb92, type: 3}
     volume: 1
+    soundType: 1
     loop: 0
     source: {fileID: 0}
   - name: attack
     clip: {fileID: 8300000, guid: 8d172bb9a7ab5e8458e99990d8b30a35, type: 3}
     volume: 1
+    soundType: 1
     loop: 0
     source: {fileID: 0}
   - name: menu
     clip: {fileID: 8300000, guid: 451db0e1a6405f349883ac8c0eb3c98d, type: 3}
-    volume: 0.5
+    volume: 1
+    soundType: 0
     loop: 1
     source: {fileID: 0}
   - name: world
     clip: {fileID: 8300000, guid: 07c8dc429b718b44cbd3dc2133f0cd27, type: 3}
-    volume: 0.5
+    volume: 1
+    soundType: 0
     loop: 1
     source: {fileID: 0}
   - name: end
     clip: {fileID: 8300000, guid: 9b22380104a6d8444b1207db85766af0, type: 3}
-    volume: 0.5
+    volume: 1
+    soundType: 0
     loop: 1
     source: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  effectsVolumeSlider: {fileID: 0}
