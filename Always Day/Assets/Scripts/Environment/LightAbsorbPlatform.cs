@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightAbsorbPlatform : MonoBehaviour
 {
     public GameObject lightAbsorb;
     public bool canAbsorb;
+    private PlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +22,13 @@ public class LightAbsorbPlatform : MonoBehaviour
             lightAbsorb.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<PlayerController>())
-        {
-            Debug.Log("in here");
+        player = other.gameObject.GetComponent<PlayerController>();
+        if (player && !player.gotLight)
             canAbsorb = true;
-        }
+        else
+            canAbsorb = false;
     }
     private void OnTriggerExit(Collider other)
     {
